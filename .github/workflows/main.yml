@@ -31,6 +31,7 @@ jobs:
 
       - name: Commit files
         run: |
+          git add .
           git config --local user.email "liajoy@163.com"
           git config --local user.name "liajoy"
           git commit -m "build example dist" -a
