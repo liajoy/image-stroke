@@ -17,9 +17,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+        with:
+          ref: gh-pages
+
+      - name: Merge
+        run: git merge origin/master
+
       - name: Install Dependencies
         run: npm install
 
       - name: Build
         run: npm run build:example
+
+      - name: Deploy
+        uses: ad-m/github-push-action@master
+        with:
+          branch: gh-pages
+          force: true
