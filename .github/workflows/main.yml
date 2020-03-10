@@ -29,6 +29,12 @@ jobs:
       - name: Build
         run: npm run build:example
 
+      - name: Commit files
+        run: |
+          git config --local user.email "liajoy@163.com"
+          git config --local user.name "liajoy"
+          git commit -m "build example dist" -a
+
       - name: Deploy
         uses: ad-m/github-push-action@master
         with:
