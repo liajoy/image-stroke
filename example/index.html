@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .panel {
+            display: flex;
+            width: 150px;
+            flex-direction: column;
+            padding: 10px;
+            border-right: 1px solid #ddd;
+            height: 100%;
+        }
+        label {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <label for="method">
+            stroke method:
+            <select name="method" id="select" value="contour">
+                <option value="rotate">rotate</option>
+                <option value="contour">contour</option>
+                <option value="distance">distance</option>
+            </select>
+        </label>
+
+        <label for="thickness">
+            stroke thickness:
+            <input type="range" name="thickness" min="0" max="100" id="thickness"/>
+        </label>
+
+        <label for="color">
+            stroke color:
+            <input type="color" name="color" id="color" value="#ff0000"/>
+        </label>
+
+        <label for="file">
+            upload image
+            <input type="file" name="file" id="file"/>
+        </label>
+
+        <span id="time">stroke time</span>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <script src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "image-stroke",
+  "version": "0.1.0",
+  "description": "Makes stroke for a image with transparent background.",
+  "main": "./lib/index",
+  "module": "./lib/index",
+  "scripts": {
+    "dev": "parcel example/index.html -d example-dist",
+    "build": "tsc",
+    "build:example": "parcel build example/index.html -d example-dist --public-url ."
+  },
+  "keywords": ["canvas", "outline", "stroke"],
+  "files": ["./lib"],
+  "author": "liajoy",
+  "license": "MIT",
+  "homepage": "https://github.com/liajoy/image-stroke#readme",
+  "repository": "https://github.com/liajoy/image-stroke",
+  "dependencies": {
+    "color": "^3.1.2",
+    "marching-squares": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/color": "^3.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "parcel": "^1.12.4",
+    "typescript": "^3.1.4"
+  }
+}

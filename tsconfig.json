@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "outDir": "./lib",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "ESNext"
+    ]
+  }
+}

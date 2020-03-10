@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build:example
+
+    - name: Get the output
+      run: |
+        echo "${{ steps.deploy.outputs.notify }}"
