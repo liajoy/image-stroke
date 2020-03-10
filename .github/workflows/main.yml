@@ -21,7 +21,7 @@ jobs:
           ref: gh-pages
 
       - name: Merge
-        run: git merge origin/master
+        run: git fetch origin master && git merge origin/master
 
       - name: Install Dependencies
         run: npm install
