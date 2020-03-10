@@ -10,7 +10,7 @@
     "build:example": "parcel build example/index.html -d example-dist --public-url ."
   },
   "keywords": ["canvas", "outline", "stroke"],
-  "files": ["./lib"],
+  "files": ["lib"],
   "author": "liajoy",
   "license": "MIT",
   "homepage": "https://github.com/liajoy/image-stroke#readme",
