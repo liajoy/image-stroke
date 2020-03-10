@@ -18,7 +18,7 @@ export default class ImageStroke {
 
     method: StrokeMethod
 
-    constructor (method: StrokeMethod) {
+    constructor (method?: StrokeMethod) {
         this.use(method)
     }
 

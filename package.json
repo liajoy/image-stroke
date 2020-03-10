@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "parcel example/index.html -d example-dist",
     "build": "tsc",
-    "build:example": "parcel build example/index.html -d example-dist --public-url ."
+    "build:example": "rm -rf ./example-dist && parcel build example/index.html -d example-dist --public-url ."
   },
   "keywords": [
     "canvas",

@@ -1,14 +1,14 @@
 import imageUrl from './test.png'
-import ImageStroke from '../src/index.ts'
-import methodRotate from '../src/method-rotate.ts'
-import methodContour from '../src/method-contour.ts'
-import methodDistance from '../src/method-distance.ts'
+import ImageStroke from '../src/index'
+import methodRotate from '../src/method-rotate'
+import methodContour from '../src/method-contour'
+import methodDistance from '../src/method-distance'
 
-const $canvas = document.getElementById('canvas')
-const $select = document.getElementById('select')
-const $thickness = document.getElementById('thickness')
-const $color = document.getElementById('color')
-const $file = document.getElementById('file')
+const $canvas = document.getElementById('canvas') as HTMLCanvasElement
+const $select = document.getElementById('select') as HTMLSelectElement
+const $thickness = document.getElementById('thickness') as HTMLInputElement
+const $color = document.getElementById('color') as HTMLInputElement
+const $file = document.getElementById('file') as HTMLInputElement
 const $time = document.getElementById('time')
 
 const showPerf = () => {
@@ -19,7 +19,7 @@ const showPerf = () => {
 }
 
 let targetImage
-const imageStroke = new ImageStroke()
+const imageStroke = new ImageStroke(methodRotate)
 const methodMap = {
     rotate: methodRotate,
     contour: methodContour,
@@ -56,6 +56,6 @@ $select.addEventListener('input', update)
 $thickness.addEventListener('input', update)
 $color.addEventListener('input', update)
 $file.addEventListener('change', (e) => {
-    const file = e.target.files[0]
+    const file = (e.target as HTMLInputElement).files[0]
     useImage(URL.createObjectURL(file))
 })
