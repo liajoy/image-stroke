@@ -34,3 +34,4 @@ jobs:
         with:
           branch: gh-pages
           force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
