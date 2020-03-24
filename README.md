@@ -20,8 +20,7 @@ There are three built-in methods to make stroke. Choose one of them in different
 
 - Rotate. Rotates the image with 360 degree.
 - Contour. Detects contours of the image by [Marching Squares](https://en.wikipedia.org/wiki/Marching_squares) and stroke them.
-- Distance. Finds distance from edge per pixel by [Distance transform](https://en.wikipedia.org/wiki/
-- Distance_transform), then fill every pixel not in stroke.
+- Distance. Finds distance from edge per pixel by [Distance transform](https://en.wikipedia.org/wiki/Distance_transform), then fill every pixel not in stroke.
 - Rotate by WebGL. The same as 「Rotate」 but implements in WebGL.
 
 ``` javascript
