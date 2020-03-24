@@ -3,6 +3,7 @@ import ImageStroke from '../src/index'
 import methodRotate from '../src/method-rotate'
 import methodContour from '../src/method-contour'
 import methodDistance from '../src/method-distance'
+import methodRotateGl from '../src/method-rotate-by-gl'
 
 const $canvas = document.getElementById('canvas') as HTMLCanvasElement
 const $select = document.getElementById('select') as HTMLSelectElement
@@ -23,10 +24,11 @@ const imageStroke = new ImageStroke(methodRotate)
 const methodMap = {
     rotate: methodRotate,
     contour: methodContour,
-    distance: methodDistance
+    distance: methodDistance,
+    rotateByGl: methodRotateGl
 }
 const update = () => {
-    const perf = showPerf()
+    const endPerf = showPerf()
     imageStroke.use(methodMap[$select.value])
     const result = imageStroke.make(targetImage, {
         thickness: Number($thickness.value),
@@ -38,7 +40,7 @@ const update = () => {
     $canvas.style.width = result.width + 'px'
     $canvas.style.height = result.height + 'px'
     ctx.drawImage(result, 0, 0)
-    perf()
+    endPerf()
 }
 
 const useImage = url => {

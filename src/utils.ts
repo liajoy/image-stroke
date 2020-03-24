@@ -8,10 +8,10 @@ type Utils<
 
 const utilsGl: Utils<WebGLRenderingContext> = {
     clear () {
-        console.log('todo')
+        // nothing
     },
     drawImage () {
-        console.log('todo')
+        // nothing
     }
 }
 const utils2d: Utils<CanvasRenderingContext2D> = {

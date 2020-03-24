@@ -23,7 +23,8 @@
   "repository": "https://github.com/liajoy/image-stroke",
   "dependencies": {
     "color": "^3.1.2",
-    "marching-squares": "^0.2.0"
+    "marching-squares": "^0.2.0",
+    "twgl.js": "^4.14.2"
   },
   "devDependencies": {
     "@types/color": "^3.0.1",

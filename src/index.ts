@@ -4,55 +4,89 @@ export type Options = {
     thickness: number;
     color: string;
 }
-export type StrokeMethod<T extends 'gl' | '2d' = 'gl' | '2d'> = {
+export type StrokeMethod<
+    T extends 'gl' | '2d' = 'gl' | '2d',
+> = {
     context: T;
-    exec: (
-        ctx: T extends 'gl' ? WebGLRenderingContext : CanvasRenderingContext2D,
-        image: HTMLImageElement,
-        options: Options
-    ) => void;
+    create: (
+        context: T extends 'gl' ? WebGLRenderingContext : CanvasRenderingContext2D,
+        image: HTMLImageElement
+    ) => (options: Options) => void;
 }
+
+const createCanvas = () => document.createElement('canvas')
 
 export default class ImageStroke {
     canvas: HTMLCanvasElement | null = null
 
-    method: StrokeMethod
+    glCanvas: HTMLCanvasElement | null = null
 
-    constructor (method?: StrokeMethod) {
-        this.use(method)
+    image: HTMLImageElement
+
+    method: ReturnType<StrokeMethod['create']>
+
+    useMethod: StrokeMethod
+
+    constructor (useMethod?: StrokeMethod) {
+        this.useMethod = useMethod
     }
 
-    use (method: StrokeMethod) {
-        this.method = method
+    getCanvas (useMethod = this.useMethod) {
+        if (useMethod.context === 'gl') {
+            this.glCanvas = this.glCanvas || createCanvas()
+            return this.glCanvas
+        } else {
+            this.canvas = this.canvas || createCanvas()
+            return this.canvas
+        }
+    }
+
+    initMethod (image = this.image, useMethod = this.useMethod) {
+        if (this.image !== image || this.useMethod !== useMethod) {
+            this.method = useMethod.create(this.getContext(useMethod), image)
+        }
+    }
+
+    setImage (image: HTMLImageElement) {
+        this.initMethod(image)
+    }
+
+    use (useMethod: StrokeMethod) {
+        this.initMethod(undefined, useMethod)
+        this.useMethod = useMethod
     }
 
     make (image: HTMLImageElement, options: Options) {
-        if (!this.canvas) {
-            this.canvas = document.createElement('canvas')
-        }
-        const { canvas } = this
-        const ctx = this.getContext()
+        this.initMethod(image)
+        this.image = image
+
+        const canvas = this.getCanvas()
         const strokeSize = options.thickness * 2
-        const [resultWidth, resultHeight] = [image.width, image.height].map((val) => val + strokeSize)
+        const [
+            resultWidth,
+            resultHeight
+        ] = [this.image.width, this.image.height].map((val) => val + strokeSize)
+        const context = this.getContext()
 
         if (resultWidth !== canvas.width || resultHeight !== canvas.height) {
             canvas.width = resultWidth
             canvas.height = resultHeight
         }
 
-        utils.clear(ctx)
+        utils.clear(context)
 
-        this.method.exec(ctx, image, options)
+        this.method(options)
 
         return canvas
     }
 
-    private getContext () {
-        switch (this.method.context) {
+    private getContext (useMethod = this.useMethod) {
+        const canvas = this.getCanvas(useMethod)
+        switch (useMethod.context) {
         case 'gl':
-            return this.canvas.getContext('gl') as WebGLRenderingContext
+            return canvas.getContext('webgl') as WebGLRenderingContext
         case '2d':
-            return this.canvas.getContext('2d') as CanvasRenderingContext2D
+            return canvas.getContext('2d') as CanvasRenderingContext2D
         }
     }
 }

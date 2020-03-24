@@ -91,31 +91,33 @@ const canvas4Image = document.createElement('canvas')
 const ctx4Image = canvas4Image.getContext('2d')
 export default {
     context: '2d',
-    exec (ctx, image, options) {
-        const { width, height } = ctx.canvas
-        const color = Color(options.color)
-        const colorArray = color.array().concat(color.alpha() * 255)
+    create (ctx, image) {
+        return (options) => {
+            const { width, height } = ctx.canvas
+            const color = Color(options.color)
+            const colorArray = color.array().concat(color.alpha() * 255)
 
-        canvas4Image.width = width
-        canvas4Image.height = height
-        ctx4Image.drawImage(image, options.thickness, options.thickness)
+            canvas4Image.width = width
+            canvas4Image.height = height
+            ctx4Image.drawImage(image, options.thickness, options.thickness)
 
-        const binaryImage = toBinaryImage(ctx4Image)
-        const distances = computeDistances(binaryImage, canvas4Image.width, canvas4Image.height)
-        const imageData = ctx.getImageData(0, 0, width, height)
-        const { data } = imageData
-        for (let i = 0; i < data.length; i += 4) {
-            const distance = distances[i / 4]
-            if (distance < options.thickness) {
-                [
-                    data[i],
-                    data[i + 1],
-                    data[i + 2],
-                    data[i + 3]
-                ] = colorArray
+            const binaryImage = toBinaryImage(ctx4Image)
+            const distances = computeDistances(binaryImage, canvas4Image.width, canvas4Image.height)
+            const imageData = ctx.getImageData(0, 0, width, height)
+            const { data } = imageData
+            for (let i = 0; i < data.length; i += 4) {
+                const distance = distances[i / 4]
+                if (distance < options.thickness) {
+                    [
+                        data[i],
+                        data[i + 1],
+                        data[i + 2],
+                        data[i + 3]
+                    ] = colorArray
+                }
             }
+            ctx.putImageData(imageData, 0, 0)
+            ctx.drawImage(image, options.thickness, options.thickness)
         }
-        ctx.putImageData(imageData, 0, 0)
-        ctx.drawImage(image, options.thickness, options.thickness)
     }
 } as StrokeMethod<'2d'>
