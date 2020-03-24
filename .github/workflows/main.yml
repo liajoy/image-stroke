@@ -18,10 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: gh-pages
-
-      - name: Merge
-        run: git fetch origin master && git merge origin/master
+          ref: master
 
       - name: Install Dependencies
         run: npm install
