@@ -2,6 +2,10 @@
 
 Makes stroke for a image with transparent background.
 
+## Demo
+
+[Click here to see live demo.](https://liajoy.github.io/image-stroke/example-dist/)
+
 ## Getting Started
 
 ### Installing
