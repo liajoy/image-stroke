@@ -4,7 +4,7 @@ Makes stroke for a image with transparent background.
 
 ## Demo
 
-[Click here to see live demo.](https://liajoy.github.io/image-stroke/example-dist/)
+[Click here to see live demo.](https://liajoy.github.io/image-stroke/)
 
 ## Getting Started
 
@@ -18,9 +18,9 @@ yarn add image-stroke
 
 There are three built-in methods to make stroke. Choose one of them in different situations.
 
-- Rotate. Rotates the image with 360 degree.
-- Contour. Detects contours of the image by [Marching Squares](https://en.wikipedia.org/wiki/Marching_squares) and stroke them.
-- Distance. Finds distance from edge per pixel by [Distance transform](https://en.wikipedia.org/wiki/Distance_transform), then fill every pixel not in stroke.
+- Rotate. Rotate the image with 360 degree.
+- Contour. Detects contours of the image by [Marching Squares](https://en.wikipedia.org/wiki/Marching_squares) and get the paths, then stroke those paths.
+- Distance. Calculates the distance from each pixel to the edge of the image by [Distance transform](https://en.wikipedia.org/wiki/Distance_transform), and fills all pixels whose distance is less than the stroke width.
 - Rotate by WebGL. The same as 「Rotate」 but implements in WebGL.
 
 ``` javascript
